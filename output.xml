@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.1 (Python 3.8.3 on win32)" generated="20200919 18:41:07.556" rpa="false">
+<suite id="s1" name="Tc" source="E:\PythonScript\YJYX项目\tc">
+<suite id="s1-s1" name="Api空白数据" source="E:\PythonScript\YJYX项目\tc\api空白数据">
+<kw name="Run Keywords" library="BuiltIn" type="setup">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>del_all_teachers</arg>
+<arg>AND</arg>
+<arg>del_all_student</arg>
+<arg>AND</arg>
+<arg>del_all_school_classes</arg>
+</arguments>
+<kw name="Del All Teachers" library="pyLib.schoolTeacherLib.SchoolTeacherLib">
+<msg timestamp="20200919 18:41:08.981" level="INFO">列出老师返回结果：{'retlist': [], 'retcode': 0}
+列出老师返回结果：{'retlist': [], 'retcode': 0}
+删除所有老师完成-----------------------</msg>
+<status status="PASS" starttime="20200919 18:41:07.686" endtime="20200919 18:41:08.981"></status>
+</kw>
+<kw name="Del All Student" library="pyLib.schoolStudentLib.SchoolStudentLib">
+<doc>删除所有学生</doc>
+<msg timestamp="20200919 18:41:09.406" level="INFO">列出学生结果为：{'retlist': [], 'retcode': 0}
+所有学生删除完成----------------</msg>
+<status status="PASS" starttime="20200919 18:41:08.981" endtime="20200919 18:41:09.406"></status>
+</kw>
+<kw name="Del All School Classes" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>删除所有的班级
+:return:</doc>
+<msg timestamp="20200919 18:41:09.607" level="INFO">"列出班级返回结果：{'gradeid': None, 'retlist': [], 'retcode': 0}"
+[]
+"列出班级返回结果：{'gradeid': None, 'retlist': [], 'retcode': 0}"
+删除所有班级成功----------------</msg>
+<status status="PASS" starttime="20200919 18:41:09.406" endtime="20200919 18:41:09.607"></status>
+</kw>
+<status status="PASS" starttime="20200919 18:41:07.686" endtime="20200919 18:41:09.607"></status>
+</kw>
+<suite id="s1-s1-s1" name="D-七年级1班" source="E:\PythonScript\YJYX项目\tc\api空白数据\d-七年级1班">
+<kw name="Add School Class" library="pyLib.schoolClassLib.SchoolClassLib" type="setup">
+<doc>添加班级
+:param grade: 班级编号（七年级1，八年级2，九年级3，高一4，高二5，高三6）
+:param name: 班级名称
+:param studentlimit: 班级最多人数
+:param idSavedName:传入需要保存id的变量名
+:return:</doc>
+<arguments>
+<arg>${g_grade_7_id}</arg>
+<arg>1班</arg>
+<arg>60</arg>
+<arg>suite_g7c1_classid</arg>
+</arguments>
+<msg timestamp="20200919 18:41:09.764" level="INFO">${suite_g7c1_classid} = 480431</msg>
+<msg timestamp="20200919 18:41:09.764" level="INFO">"新增班级返回结果：{'invitecode': '4804310527372', 'retcode': 0, 'id': 480431}"</msg>
+<status status="PASS" starttime="20200919 18:41:09.611" endtime="20200919 18:41:09.764"></status>
+</kw>
+<suite id="s1-s1-s1-s1" name="班级管理" source="E:\PythonScript\YJYX项目\tc\api空白数据\d-七年级1班\班级管理.robot">
+<test id="s1-s1-s1-s1-t1" name="添加班级2 - tc000002">
+<kw name="Add School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>添加班级
+:param grade: 班级编号（七年级1，八年级2，九年级3，高一4，高二5，高三6）
+:param name: 班级名称
+:param studentlimit: 班级最多人数
+:param idSavedName:传入需要保存id的变量名
+:return:</doc>
+<arguments>
+<arg>${g_grade_7_id}</arg>
+<arg>2班</arg>
+<arg>60</arg>
+</arguments>
+<assign>
+<var>${addRes}</var>
+</assign>
+<msg timestamp="20200919 18:41:10.162" level="INFO">"新增班级返回结果：{'invitecode': '4804325325408', 'retcode': 0, 'id': 480432}"</msg>
+<msg timestamp="20200919 18:41:10.162" level="INFO">${addRes} = {'invitecode': '4804325325408', 'retcode': 0, 'id': 480432}</msg>
+<status status="PASS" starttime="20200919 18:41:09.771" endtime="20200919 18:41:10.162"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>添加班级：${addRes}</arg>
+</arguments>
+<status status="PASS" starttime="20200919 18:41:10.163" endtime="20200919 18:41:10.164"></status>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<doc>Fails if the given condition is not true.</doc>
+<arguments>
+<arg>$addRes['retcode']==0</arg>
+</arguments>
+<status status="PASS" starttime="20200919 18:41:10.164" endtime="20200919 18:41:10.167"></status>
+</kw>
+<kw name="List School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>列出班级
+:param gradeid: 班级编号
+:return:</doc>
+<arguments>
+<arg>${g_grade_7_id}</arg>
+</arguments>
+<assign>
+<var>${listRes}</var>
+</assign>
+<msg timestamp="20200919 18:41:10.277" level="INFO">("列出班级返回结果：{'gradeid': 1, 'retlist': [{'name': '1班', 'grade__name': '七年级', "
+ "'invitecode': '4804310527372', 'studentlimit': 60, 'studentnumber': 0, 'id': "
+ "480431, 'teacherlist': []}, {'name': '2班', 'grade__name': '七年级', "
+ "'invitecode': '4804325325408', 'studentlimit': 60, 'studentnumber': 0, 'id': "
+ "480432, 'teacherlist': []}], 'retcode': 0}")</msg>
+<msg timestamp="20200919 18:41:10.278" level="INFO">${listRes} = {'gradeid': 1, 'retlist': [{'name': '1班', 'grade__name': '七年级', 'invitecode': '4804310527372', 'studentlimit': 60, 'studentnumber': 0, 'id': 480431, 'teacherlist': []}, {'name': '2班', 'grade__name': '...</msg>
+<status status="PASS" starttime="20200919 18:41:10.168" endtime="20200919 18:41:10.278"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>$listRes['retlist']</arg>
+</arguments>
+<assign>
+<var>${retlist}</var>
+</assign>
+<msg timestamp="20200919 18:41:10.279" level="INFO">${retlist} = [{'name': '1班', 'grade__name': '七年级', 'invitecode': '4804310527372', 'studentlimit': 60, 'studentnumber': 0, 'id': 480431, 'teacherlist': []}, {'name': '2班', 'grade__name': '七年级', 'invitecode': '48043...</msg>
+<status status="PASS" starttime="20200919 18:41:10.278" endtime="20200919 18:41:10.279"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>列出班级：${retlist}</arg>
+</arguments>
+<status status="PASS" starttime="20200919 18:41:10.279" endtime="20200919 18:41:10.280"></status>
+</kw>
+<kw name="Classlist Should Contain" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>判断一个班级(字典)是否在列出班级的列表里,新增修改班级的用例都可以用
+:param classlist: 给出的列表
+:param classname: 班级名称
+:param gradename: 年级
+:param invitecode: 班级邀请码（新增时后台自动生成的）
+:param studentlimit: 班级最多人数
+:param studentnumber: 班级当前人数
+:param id: 班级id号（添加时生成的）
+:return:</doc>
+<arguments>
+<arg>${retlist}</arg>
+<arg>2班</arg>
+<arg>七年级</arg>
+<arg>${addRes}[invitecode]</arg>
+<arg>60</arg>
+<arg>0</arg>
+<arg>${addRes}[id]</arg>
+</arguments>
+<msg timestamp="20200919 18:41:10.280" level="INFO">("列出班级：[{'name': '1班', 'grade__name': '七年级', 'invitecode': '4804310527372', "
+ "'studentlimit': 60, 'studentnumber': 0, 'id': 480431, 'teacherlist': []}, "
+ "{'name': '2班', 'grade__name': '七年级', 'invitecode': '4804325325408', "
+ "'studentlimit': 60, 'studentnumber': 0, 'id': 480432, 'teacherlist': []}]")
+'======================================'
+("预期存在次数的班级：{'name': '2班', 'grade__name': '七年级', 'invitecode': "
+ "'4804325325408', 'studentlimit': 60, 'studentnumber': 0, 'id': 480432, "
+ "'teacherlist': []}")</msg>
+<status status="PASS" starttime="20200919 18:41:10.280" endtime="20200919 18:41:10.280"></status>
+</kw>
+<kw name="Del School Class" library="pyLib.schoolClassLib.SchoolClassLib" type="teardown">
+<doc>删除班级
+:param classid: 班级编号
+:return:</doc>
+<arguments>
+<arg>${addRes}[id]</arg>
+</arguments>
+<msg timestamp="20200919 18:41:10.385" level="INFO">http://ci.ytesting.com/api/3school/school_classes/480432
+"删除班级返回结果：{'retcode': 0}"</msg>
+<status status="PASS" starttime="20200919 18:41:10.281" endtime="20200919 18:41:10.385"></status>
+</kw>
+<doc>添加一个班级（年级相同，但班级名不同）</doc>
+<status status="PASS" starttime="20200919 18:41:09.770" endtime="20200919 18:41:10.386" critical="yes"></status>
+</test>
+<test id="s1-s1-s1-s1-t2" name="添加班级3 - tc000003">
+<kw name="List School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>列出班级
+:param gradeid: 班级编号
+:return:</doc>
+<arguments>
+<arg>${g_grade_7_id}</arg>
+</arguments>
+<assign>
+<var>${listBefore}</var>
+</assign>
+<msg timestamp="20200919 18:41:10.496" level="INFO">("列出班级返回结果：{'gradeid': 1, 'retlist': [{'name': '1班', 'grade__name': '七年级', "
+ "'invitecode': '4804310527372', 'studentlimit': 60, 'studentnumber': 0, 'id': "
+ "480431, 'teacherlist': []}], 'retcode': 0}")</msg>
+<msg timestamp="20200919 18:41:10.496" level="INFO">${listBefore} = {'gradeid': 1, 'retlist': [{'name': '1班', 'grade__name': '七年级', 'invitecode': '4804310527372', 'studentlimit': 60, 'studentnumber': 0, 'id': 480431, 'teacherlist': []}], 'retcode': 0}</msg>
+<status status="PASS" starttime="20200919 18:41:10.390" endtime="20200919 18:41:10.496"></status>
+</kw>
+<kw name="Add School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>添加班级
+:param grade: 班级编号（七年级1，八年级2，九年级3，高一4，高二5，高三6）
+:param name: 班级名称
+:param studentlimit: 班级最多人数
+:param idSavedName:传入需要保存id的变量名
+:return:</doc>
+<arguments>
+<arg>${g_grade_7_id}</arg>
+<arg>1班</arg>
+<arg>60</arg>
+</arguments>
+<assign>
+<var>${addRes}</var>
+</assign>
+<msg timestamp="20200919 18:41:10.598" level="INFO">("新增班级返回结果：{'reason': 'Traceback (most recent call last):\\n  File "
+ '"/home/yjyx/yijiao_src/yijiao_main/services/datamodel/schoolclass/models.py", '
+ 'line 542, in addClass\\n    school_class = '
+ 'self._addClass(name,schoolid,gradeid,studentlimit)\\n  File '
+ '"/home/yjyx/yijiao_src/yijiao_main/services/datamodel/schoolclass/models.py", '
+ 'line 531, in _addClass\\n    school_class.save()\\n  File '
+ '"/usr/local/lib/python2.7/site-packages/django/db/models/base.py", line 710, '
+ 'in save\\n    force_update=force_update, update_fields=update_fields)\\n  '
+ 'File "/usr/local/lib/python2.7/site-packages/django/db/models/base.py", line '
+ '738, in save_base\\n    updated = self._save_table(raw, cls, force_insert, '
+ 'force_update, using, update_fields)\\n  File '
+ '"/usr/local/lib/python2.7/site-packages/django/db/models/base.py", line 822, '
+ 'in _save_table\\n    result = self._do_insert(cls._base_manager, using, '
+ 'fields, update_pk, raw)\\n  File '
+ '"/usr/local/lib/python2.7/site-packages/django/db/models/base.py", line 861, '
+ 'in _do_insert\\n    using=using, raw=raw)\\n  File '
+ '"/usr/local/lib/python2.7/site-packages/django/db/models/manager.py", line '
+ '127, in manager_method\\n    return getattr(self.get_queryset(), '
+ 'name)(*args, **kwargs)\\n  File '
+ '"/usr/local/lib/python2.7/site-packages/django/db/models/query.py", line '
+ '920, in _insert\\n    return '
+ 'query.get_compiler(using=using).execute_sql(return_id)\\n  File '
+ '"/usr/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", '
+ 'line 974, in execute_sql\\n    cursor.execute(sql, params)\\n  File '
+ '"/usr/local/lib/python2.7/site-packages/django/db/backends/utils.py", line '
+ '64, in execute\\n    return self.cursor.execute(sql, params)\\n  File '
+ '"/usr/local/lib/python2.7/site-packages/django/db/utils.py", line 97, in '
+ '__exit__\\n    six.reraise(dj_exc_type, dj_exc_value, traceback)\\n  File '
+ '"/usr/local/lib/python2.7/site-packages/django/db/backends/utils.py", line '
+ '64, in execute\\n    return self.cursor.execute(sql, params)\\n  File '
+ '"/usr/local/lib/python2.7/site-packages/django/db/backends/mysql/base.py", '
+ 'line 124, in execute\\n    return self.cursor.execute(query, args)\\n  File '
+ '"/usr/local/lib/python2.7/site-packages/MySQLdb/cursors.py", line 205, in '
+ 'execute\\n    self.errorhandler(self, exc, value)\\n  File '
+ '"/usr/local/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in '
+ 'defaulterrorhandler\\n    raise errorclass, errorvalue\\nIntegrityError: '
+ '(1062, "Duplicate entry \\\'1\\\\xe7\\\\x8f\\\\xad-1089-1\\\' for key '
+ '\\\'name\\\'")\\n\', \'retcode\': 1}')</msg>
+<msg timestamp="20200919 18:41:10.598" level="INFO">${addRes} = {'reason': 'Traceback (most recent call last):\n  File "/home/yjyx/yijiao_src/yijiao_main/services/datamodel/schoolclass/models.py", line 542, in addClass\n    school_class = self._addClass(name,schoo...</msg>
+<status status="PASS" starttime="20200919 18:41:10.497" endtime="20200919 18:41:10.598"></status>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<doc>Fails if the given condition is not true.</doc>
+<arguments>
+<arg>$addRes['retcode']==1</arg>
+</arguments>
+<status status="PASS" starttime="20200919 18:41:10.599" endtime="20200919 18:41:10.599"></status>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<doc>Fails if the given condition is not true.</doc>
+<arguments>
+<arg>$addRes['reason']=="duplicated class name"</arg>
+</arguments>
+<msg timestamp="20200919 18:41:10.600" level="FAIL">'$addRes['reason']=="duplicated class name"' should be true.</msg>
+<status status="FAIL" starttime="20200919 18:41:10.600" endtime="20200919 18:41:10.600"></status>
+</kw>
+<doc>添加一个班级(班级号和班级名称都已经存在)，此用例，系统存在bug，返回的reason错误</doc>
+<status status="FAIL" starttime="20200919 18:41:10.387" endtime="20200919 18:41:10.601" critical="yes">'$addRes['reason']=="duplicated class name"' should be true.</status>
+</test>
+<test id="s1-s1-s1-s1-t3" name="修改班级1 - tc000051">
+<kw name="Add School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>添加班级
+:param grade: 班级编号（七年级1，八年级2，九年级3，高一4，高二5，高三6）
+:param name: 班级名称
+:param studentlimit: 班级最多人数
+:param idSavedName:传入需要保存id的变量名
+:return:</doc>
+<arguments>
+<arg>${g_grade_7_id}</arg>
+<arg>2班</arg>
+<arg>60</arg>
+</arguments>
+<assign>
+<var>${addRes}</var>
+</assign>
+<msg timestamp="20200919 18:41:10.715" level="INFO">"新增班级返回结果：{'invitecode': '4804342163592', 'retcode': 0, 'id': 480434}"</msg>
+<msg timestamp="20200919 18:41:10.715" level="INFO">${addRes} = {'invitecode': '4804342163592', 'retcode': 0, 'id': 480434}</msg>
+<status status="PASS" starttime="20200919 18:41:10.604" endtime="20200919 18:41:10.715"></status>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<doc>Fails if the given condition is not true.</doc>
+<arguments>
+<arg>$addRes['retcode']==0</arg>
+</arguments>
+<status status="PASS" starttime="20200919 18:41:10.715" endtime="20200919 18:41:10.716"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>$addRes['id']</arg>
+</arguments>
+<assign>
+<var>${classid}</var>
+</assign>
+<msg timestamp="20200919 18:41:10.717" level="INFO">${classid} = 480434</msg>
+<status status="PASS" starttime="20200919 18:41:10.716" endtime="20200919 18:41:10.717"></status>
+</kw>
+<kw name="Update School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<arguments>
+<arg>${classid}</arg>
+<arg>3班</arg>
+<arg>30</arg>
+</arguments>
+<assign>
+<var>${updclass}</var>
+</assign>
+<msg timestamp="20200919 18:41:10.832" level="INFO">修改班级返回结果：{'retcode': 0}</msg>
+<msg timestamp="20200919 18:41:10.832" level="INFO">${updclass} = {'retcode': 0}</msg>
+<status status="PASS" starttime="20200919 18:41:10.717" endtime="20200919 18:41:10.832"></status>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<doc>Fails if the given condition is not true.</doc>
+<arguments>
+<arg>$updclass['retcode']==0</arg>
+</arguments>
+<status status="PASS" starttime="20200919 18:41:10.833" endtime="20200919 18:41:10.833"></status>
+</kw>
+<kw name="List School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>列出班级
+:param gradeid: 班级编号
+:return:</doc>
+<arguments>
+<arg>${g_grade_7_id}</arg>
+</arguments>
+<assign>
+<var>${retlist}</var>
+</assign>
+<msg timestamp="20200919 18:41:10.934" level="INFO">("列出班级返回结果：{'gradeid': 1, 'retlist': [{'name': '1班', 'grade__name': '七年级', "
+ "'invitecode': '4804310527372', 'studentlimit': 60, 'studentnumber': 0, 'id': "
+ "480431, 'teacherlist': []}, {'name': '3班', 'grade__name': '七年级', "
+ "'invitecode': '4804342163592', 'studentlimit': 30, 'studentnumber': 0, 'id': "
+ "480434, 'teacherlist': []}], 'retcode': 0}")</msg>
+<msg timestamp="20200919 18:41:10.934" level="INFO">${retlist} = {'gradeid': 1, 'retlist': [{'name': '1班', 'grade__name': '七年级', 'invitecode': '4804310527372', 'studentlimit': 60, 'studentnumber': 0, 'id': 480431, 'teacherlist': []}, {'name': '3班', 'grade__name': '...</msg>
+<status status="PASS" starttime="20200919 18:41:10.834" endtime="20200919 18:41:10.934"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>$retlist['retlist']</arg>
+</arguments>
+<assign>
+<var>${modlist}</var>
+</assign>
+<msg timestamp="20200919 18:41:10.935" level="INFO">${modlist} = [{'name': '1班', 'grade__name': '七年级', 'invitecode': '4804310527372', 'studentlimit': 60, 'studentnumber': 0, 'id': 480431, 'teacherlist': []}, {'name': '3班', 'grade__name': '七年级', 'invitecode': '48043...</msg>
+<status status="PASS" starttime="20200919 18:41:10.935" endtime="20200919 18:41:10.935"></status>
+</kw>
+<kw name="Classlist Should Contain" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>判断一个班级(字典)是否在列出班级的列表里,新增修改班级的用例都可以用
+:param classlist: 给出的列表
+:param classname: 班级名称
+:param gradename: 年级
+:param invitecode: 班级邀请码（新增时后台自动生成的）
+:param studentlimit: 班级最多人数
+:param studentnumber: 班级当前人数
+:param id: 班级id号（添加时生成的）
+:return:</doc>
+<arguments>
+<arg>${modlist}</arg>
+<arg>3班</arg>
+<arg>七年级</arg>
+<arg>${addRes}[invitecode]</arg>
+<arg>30</arg>
+<arg>0</arg>
+<arg>${classid}</arg>
+</arguments>
+<msg timestamp="20200919 18:41:10.936" level="INFO">("列出班级：[{'name': '1班', 'grade__name': '七年级', 'invitecode': '4804310527372', "
+ "'studentlimit': 60, 'studentnumber': 0, 'id': 480431, 'teacherlist': []}, "
+ "{'name': '3班', 'grade__name': '七年级', 'invitecode': '4804342163592', "
+ "'studentlimit': 30, 'studentnumber': 0, 'id': 480434, 'teacherlist': []}]")
+'======================================'
+("预期存在次数的班级：{'name': '3班', 'grade__name': '七年级', 'invitecode': "
+ "'4804342163592', 'studentlimit': 30, 'studentnumber': 0, 'id': 480434, "
+ "'teacherlist': []}")</msg>
+<status status="PASS" starttime="20200919 18:41:10.936" endtime="20200919 18:41:10.936"></status>
+</kw>
+<kw name="Del School Class" library="pyLib.schoolClassLib.SchoolClassLib" type="teardown">
+<doc>删除班级
+:param classid: 班级编号
+:return:</doc>
+<arguments>
+<arg>${classid}</arg>
+</arguments>
+<msg timestamp="20200919 18:41:11.047" level="INFO">http://ci.ytesting.com/api/3school/school_classes/480434
+"删除班级返回结果：{'retcode': 0}"</msg>
+<status status="PASS" starttime="20200919 18:41:10.937" endtime="20200919 18:41:11.047"></status>
+</kw>
+<doc>修改班级名称(新名称改年级不存在)</doc>
+<status status="PASS" starttime="20200919 18:41:10.602" endtime="20200919 18:41:11.048" critical="yes"></status>
+</test>
+<test id="s1-s1-s1-s1-t4" name="修改班级2 - tc000052">
+<kw name="Add School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>添加班级
+:param grade: 班级编号（七年级1，八年级2，九年级3，高一4，高二5，高三6）
+:param name: 班级名称
+:param studentlimit: 班级最多人数
+:param idSavedName:传入需要保存id的变量名
+:return:</doc>
+<arguments>
+<arg>${g_grade_7_id}</arg>
+<arg>2班</arg>
+<arg>60</arg>
+</arguments>
+<assign>
+<var>${addRes}</var>
+</assign>
+<msg timestamp="20200919 18:41:11.190" level="INFO">"新增班级返回结果：{'invitecode': '4804353016491', 'retcode': 0, 'id': 480435}"</msg>
+<msg timestamp="20200919 18:41:11.191" level="INFO">${addRes} = {'invitecode': '4804353016491', 'retcode': 0, 'id': 480435}</msg>
+<status status="PASS" starttime="20200919 18:41:11.052" endtime="20200919 18:41:11.191"></status>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<doc>Fails if the given condition is not true.</doc>
+<arguments>
+<arg>$addRes['retcode']==0</arg>
+</arguments>
+<status status="PASS" starttime="20200919 18:41:11.191" endtime="20200919 18:41:11.192"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>$addRes['id']</arg>
+</arguments>
+<assign>
+<var>${classid}</var>
+</assign>
+<msg timestamp="20200919 18:41:11.192" level="INFO">${classid} = 480435</msg>
+<status status="PASS" starttime="20200919 18:41:11.192" endtime="20200919 18:41:11.192"></status>
+</kw>
+<kw name="List School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>列出班级
+:param gradeid: 班级编号
+:return:</doc>
+<arguments>
+<arg>${g_grade_7_id}</arg>
+</arguments>
+<assign>
+<var>${listbefore}</var>
+</assign>
+<msg timestamp="20200919 18:41:11.296" level="INFO">("列出班级返回结果：{'gradeid': 1, 'retlist': [{'name': '1班', 'grade__name': '七年级', "
+ "'invitecode': '4804310527372', 'studentlimit': 60, 'studentnumber': 0, 'id': "
+ "480431, 'teacherlist': []}, {'name': '2班', 'grade__name': '七年级', "
+ "'invitecode': '4804353016491', 'studentlimit': 60, 'studentnumber': 0, 'id': "
+ "480435, 'teacherlist': []}], 'retcode': 0}")</msg>
+<msg timestamp="20200919 18:41:11.296" level="INFO">${listbefore} = {'gradeid': 1, 'retlist': [{'name': '1班', 'grade__name': '七年级', 'invitecode': '4804310527372', 'studentlimit': 60, 'studentnumber': 0, 'id': 480431, 'teacherlist': []}, {'name': '2班', 'grade__name': '...</msg>
+<status status="PASS" starttime="20200919 18:41:11.193" endtime="20200919 18:41:11.296"></status>
+</kw>
+<kw name="Update School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<arguments>
+<arg>${classid}</arg>
+<arg>1班</arg>
+<arg>30</arg>
+</arguments>
+<assign>
+<var>${updclass}</var>
+</assign>
+<msg timestamp="20200919 18:41:11.429" level="INFO">修改班级返回结果：{'reason': '未知错误:Traceback (most recent call last):\n  File "/home/yjyx/yijiao_src/yijiao_main/services/datamodel/schoolclass/models.py", line 612, in modifyClass\n    school_class.save()\n  File "/usr/local/lib/python2.7/site-packages/django/db/models/base.py", line 710, in save\n    force_update=force_update, update_fields=update_fields)\n  File "/usr/local/lib/python2.7/site-packages/django/db/models/base.py", line 738, in save_base\n    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)\n  File "/usr/local/lib/python2.7/site-packages/django/db/models/base.py", line 803, in _save_table\n    forced_update)\n  File "/usr/local/lib/python2.7/site-packages/django/db/models/base.py", line 853, in _do_update\n    return filtered._update(values) &gt; 0\n  File "/usr/local/lib/python2.7/site-packages/django/db/models/query.py", line 580, in _update\n    return query.get_compiler(self.db).execute_sql(CURSOR)\n  File "/usr/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 1062, in execute_sql\n    cursor = super(SQLUpdateCompiler, self).execute_sql(result_type)\n  File "/usr/local/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 840, in execute_sql\n    cursor.execute(sql, params)\n  File "/usr/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute\n    return self.cursor.execute(sql, params)\n  File "/usr/local/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__\n    six.reraise(dj_exc_type, dj_exc_value, traceback)\n  File "/usr/local/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute\n    return self.cursor.execute(sql, params)\n  File "/usr/local/lib/python2.7/site-packages/django/db/backends/mysql/base.py", line 124, in execute\n    return self.cursor.execute(query, args)\n  File "/usr/local/lib/python2.7/site-packages/MySQLdb/cursors.py", line 205, in execute\n    self.errorhandler(self, exc, value)\n  File "/usr/local/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler\n    raise errorclass, errorvalue\nIntegrityError: (1062, "Duplicate entry \'1\\xe7\\x8f\\xad-1089-1\' for key \'name\'")\n', 'retcode': 10000}</msg>
+<msg timestamp="20200919 18:41:11.429" level="INFO">${updclass} = {'reason': '未知错误:Traceback (most recent call last):\n  File "/home/yjyx/yijiao_src/yijiao_main/services/datamodel/schoolclass/models.py", line 612, in modifyClass\n    school_class.save()\n  File "/us...</msg>
+<status status="PASS" starttime="20200919 18:41:11.297" endtime="20200919 18:41:11.429"></status>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<doc>Fails if the given condition is not true.</doc>
+<arguments>
+<arg>$updclass['retcode']==1</arg>
+</arguments>
+<msg timestamp="20200919 18:41:11.430" level="FAIL">'$updclass['retcode']==1' should be true.</msg>
+<status status="FAIL" starttime="20200919 18:41:11.430" endtime="20200919 18:41:11.430"></status>
+</kw>
+<kw name="Del School Class" library="pyLib.schoolClassLib.SchoolClassLib" type="teardown">
+<doc>删除班级
+:param classid: 班级编号
+:return:</doc>
+<arguments>
+<arg>${classid}</arg>
+</arguments>
+<msg timestamp="20200919 18:41:11.587" level="INFO">http://ci.ytesting.com/api/3school/school_classes/480435
+"删除班级返回结果：{'retcode': 0}"</msg>
+<status status="PASS" starttime="20200919 18:41:11.431" endtime="20200919 18:41:11.587"></status>
+</kw>
+<doc>修改班级名为该年级已经存在的班级名，此用例系统存在bug</doc>
+<status status="FAIL" starttime="20200919 18:41:11.050" endtime="20200919 18:41:11.587" critical="yes">'$updclass['retcode']==1' should be true.</status>
+</test>
+<test id="s1-s1-s1-s1-t5" name="修改班级3 - tc000053">
+<kw name="Update School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<arguments>
+<arg>999999</arg>
+<arg>1班</arg>
+<arg>60</arg>
+</arguments>
+<assign>
+<var>${updclass}</var>
+</assign>
+<msg timestamp="20200919 18:41:11.699" level="INFO">修改班级返回结果：{'reason': 'id 为`999999`的班级不存在', 'retcode': 404}</msg>
+<msg timestamp="20200919 18:41:11.699" level="INFO">${updclass} = {'reason': 'id 为`999999`的班级不存在', 'retcode': 404}</msg>
+<status status="PASS" starttime="20200919 18:41:11.590" endtime="20200919 18:41:11.699"></status>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<doc>Fails if the given condition is not true.</doc>
+<arguments>
+<arg>$updclass['retcode']==404</arg>
+</arguments>
+<status status="PASS" starttime="20200919 18:41:11.699" endtime="20200919 18:41:11.700"></status>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<doc>Fails if the given condition is not true.</doc>
+<arguments>
+<arg>$updclass['reason']=="id 为`999999`的班级不存在"</arg>
+</arguments>
+<status status="PASS" starttime="20200919 18:41:11.700" endtime="20200919 18:41:11.701"></status>
+</kw>
+<doc>修改班级id为不存在的</doc>
+<status status="PASS" starttime="20200919 18:41:11.589" endtime="20200919 18:41:11.701" critical="yes"></status>
+</test>
+<test id="s1-s1-s1-s1-t6" name="删除班级1 - tc000081">
+<kw name="Del School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>删除班级
+:param classid: 班级编号
+:return:</doc>
+<arguments>
+<arg>999999</arg>
+</arguments>
+<assign>
+<var>${defRes}</var>
+</assign>
+<msg timestamp="20200919 18:41:11.812" level="INFO">http://ci.ytesting.com/api/3school/school_classes/999999
+"删除班级返回结果：{'reason': 'id 为`999999`的班级不存在', 'retcode': 404}"</msg>
+<msg timestamp="20200919 18:41:11.812" level="INFO">${defRes} = {'reason': 'id 为`999999`的班级不存在', 'retcode': 404}</msg>
+<status status="PASS" starttime="20200919 18:41:11.704" endtime="20200919 18:41:11.812"></status>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<doc>Fails if the given condition is not true.</doc>
+<arguments>
+<arg>$defRes['retcode']==404</arg>
+</arguments>
+<status status="PASS" starttime="20200919 18:41:11.813" endtime="20200919 18:41:11.813"></status>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<doc>Fails if the given condition is not true.</doc>
+<arguments>
+<arg>$defRes['reason']=='id 为`999999`的班级不存在'</arg>
+</arguments>
+<status status="PASS" starttime="20200919 18:41:11.814" endtime="20200919 18:41:11.814"></status>
+</kw>
+<doc>用不存在的id号请求删除班级</doc>
+<status status="PASS" starttime="20200919 18:41:11.703" endtime="20200919 18:41:11.815" critical="yes"></status>
+</test>
+<test id="s1-s1-s1-s1-t7" name="删除班级2 - tc000082">
+<kw name="Add School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>添加班级
+:param grade: 班级编号（七年级1，八年级2，九年级3，高一4，高二5，高三6）
+:param name: 班级名称
+:param studentlimit: 班级最多人数
+:param idSavedName:传入需要保存id的变量名
+:return:</doc>
+<arguments>
+<arg>${g_grade_7_id}</arg>
+<arg>2班</arg>
+<arg>60</arg>
+</arguments>
+<assign>
+<var>${addRes}</var>
+</assign>
+<msg timestamp="20200919 18:41:11.930" level="INFO">"新增班级返回结果：{'invitecode': '4804360276679', 'retcode': 0, 'id': 480436}"</msg>
+<msg timestamp="20200919 18:41:11.931" level="INFO">${addRes} = {'invitecode': '4804360276679', 'retcode': 0, 'id': 480436}</msg>
+<status status="PASS" starttime="20200919 18:41:11.816" endtime="20200919 18:41:11.931"></status>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<doc>Fails if the given condition is not true.</doc>
+<arguments>
+<arg>$addRes['retcode']==0</arg>
+</arguments>
+<status status="PASS" starttime="20200919 18:41:11.931" endtime="20200919 18:41:11.932"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>$addRes['id']</arg>
+</arguments>
+<assign>
+<var>${classid}</var>
+</assign>
+<msg timestamp="20200919 18:41:11.933" level="INFO">${classid} = 480436</msg>
+<status status="PASS" starttime="20200919 18:41:11.932" endtime="20200919 18:41:11.933"></status>
+</kw>
+<kw name="List School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>列出班级
+:param gradeid: 班级编号
+:return:</doc>
+<arguments>
+<arg>${g_grade_7_id}</arg>
+</arguments>
+<assign>
+<var>${listBefore}</var>
+</assign>
+<msg timestamp="20200919 18:41:12.049" level="INFO">("列出班级返回结果：{'gradeid': 1, 'retlist': [{'name': '1班', 'grade__name': '七年级', "
+ "'invitecode': '4804310527372', 'studentlimit': 60, 'studentnumber': 0, 'id': "
+ "480431, 'teacherlist': []}, {'name': '2班', 'grade__name': '七年级', "
+ "'invitecode': '4804360276679', 'studentlimit': 60, 'studentnumber': 0, 'id': "
+ "480436, 'teacherlist': []}], 'retcode': 0}")</msg>
+<msg timestamp="20200919 18:41:12.049" level="INFO">${listBefore} = {'gradeid': 1, 'retlist': [{'name': '1班', 'grade__name': '七年级', 'invitecode': '4804310527372', 'studentlimit': 60, 'studentnumber': 0, 'id': 480431, 'teacherlist': []}, {'name': '2班', 'grade__name': '...</msg>
+<status status="PASS" starttime="20200919 18:41:11.933" endtime="20200919 18:41:12.049"></status>
+</kw>
+<kw name="Classlist Should Contain" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>判断一个班级(字典)是否在列出班级的列表里,新增修改班级的用例都可以用
+:param classlist: 给出的列表
+:param classname: 班级名称
+:param gradename: 年级
+:param invitecode: 班级邀请码（新增时后台自动生成的）
+:param studentlimit: 班级最多人数
+:param studentnumber: 班级当前人数
+:param id: 班级id号（添加时生成的）
+:return:</doc>
+<arguments>
+<arg>${listBefore}[retlist]</arg>
+<arg>2班</arg>
+<arg>七年级</arg>
+<arg>${addRes}[invitecode]</arg>
+<arg>60</arg>
+<arg>0</arg>
+<arg>${classid}</arg>
+</arguments>
+<msg timestamp="20200919 18:41:12.050" level="INFO">("列出班级：[{'name': '1班', 'grade__name': '七年级', 'invitecode': '4804310527372', "
+ "'studentlimit': 60, 'studentnumber': 0, 'id': 480431, 'teacherlist': []}, "
+ "{'name': '2班', 'grade__name': '七年级', 'invitecode': '4804360276679', "
+ "'studentlimit': 60, 'studentnumber': 0, 'id': 480436, 'teacherlist': []}]")
+'======================================'
+("预期存在次数的班级：{'name': '2班', 'grade__name': '七年级', 'invitecode': "
+ "'4804360276679', 'studentlimit': 60, 'studentnumber': 0, 'id': 480436, "
+ "'teacherlist': []}")</msg>
+<status status="PASS" starttime="20200919 18:41:12.050" endtime="20200919 18:41:12.050"></status>
+</kw>
+<kw name="Del School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>删除班级
+:param classid: 班级编号
+:return:</doc>
+<arguments>
+<arg>${classid}</arg>
+</arguments>
+<assign>
+<var>${delRes}</var>
+</assign>
+<msg timestamp="20200919 18:41:12.151" level="INFO">http://ci.ytesting.com/api/3school/school_classes/480436
+"删除班级返回结果：{'retcode': 0}"</msg>
+<msg timestamp="20200919 18:41:12.152" level="INFO">${delRes} = {'retcode': 0}</msg>
+<status status="PASS" starttime="20200919 18:41:12.051" endtime="20200919 18:41:12.152"></status>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<doc>Fails if the given condition is not true.</doc>
+<arguments>
+<arg>$delRes['retcode']==0</arg>
+</arguments>
+<status status="PASS" starttime="20200919 18:41:12.152" endtime="20200919 18:41:12.153"></status>
+</kw>
+<kw name="List School Class" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>列出班级
+:param gradeid: 班级编号
+:return:</doc>
+<arguments>
+<arg>${g_grade_7_id}</arg>
+</arguments>
+<assign>
+<var>${listAfter}</var>
+</assign>
+<msg timestamp="20200919 18:41:12.260" level="INFO">("列出班级返回结果：{'gradeid': 1, 'retlist': [{'name': '1班', 'grade__name': '七年级', "
+ "'invitecode': '4804310527372', 'studentlimit': 60, 'studentnumber': 0, 'id': "
+ "480431, 'teacherlist': []}], 'retcode': 0}")</msg>
+<msg timestamp="20200919 18:41:12.260" level="INFO">${listAfter} = {'gradeid': 1, 'retlist': [{'name': '1班', 'grade__name': '七年级', 'invitecode': '4804310527372', 'studentlimit': 60, 'studentnumber': 0, 'id': 480431, 'teacherlist': []}], 'retcode': 0}</msg>
+<status status="PASS" starttime="20200919 18:41:12.153" endtime="20200919 18:41:12.260"></status>
+</kw>
+<kw name="Classlist Should Contain" library="pyLib.schoolClassLib.SchoolClassLib">
+<doc>判断一个班级(字典)是否在列出班级的列表里,新增修改班级的用例都可以用
+:param classlist: 给出的列表
+:param classname: 班级名称
+:param gradename: 年级
+:param invitecode: 班级邀请码（新增时后台自动生成的）
+:param studentlimit: 班级最多人数
+:param studentnumber: 班级当前人数
+:param id: 班级id号（添加时生成的）
+:return:</doc>
+<arguments>
+<arg>${listAfter}[retlist]</arg>
+<arg>2班</arg>
+<arg>七年级</arg>
+<arg>${addRes}[invitecode]</arg>
+<arg>60</arg>
+<arg>0</arg>
+<arg>${classid}</arg>
+<arg>0</arg>
+</arguments>
+<msg timestamp="20200919 18:41:12.261" level="INFO">("列出班级：[{'name': '1班', 'grade__name': '七年级', 'invitecode': '4804310527372', "
+ "'studentlimit': 60, 'studentnumber': 0, 'id': 480431, 'teacherlist': []}]")
+'======================================'
+("预期存在次数的班级：{'name': '2班', 'grade__name': '七年级', 'invitecode': "
+ "'4804360276679', 'studentlimit': 60, 'studentnumber': 0, 'id': 480436, "
+ "'teacherlist': []}")</msg>
+<status status="PASS" starttime="20200919 18:41:12.261" endtime="20200919 18:41:12.261"></status>
+</kw>
+<doc>正常删除班级</doc>
+<status status="PASS" starttime="20200919 18:41:11.816" endtime="20200919 18:41:12.262" critical="yes"></status>
+</test>
+<status status="FAIL" starttime="20200919 18:41:09.764" endtime="20200919 18:41:12.263"></status>
+</suite>
+<kw name="Del School Class" library="pyLib.schoolClassLib.SchoolClassLib" type="teardown">
+<doc>删除班级
+:param classid: 班级编号
+:return:</doc>
+<arguments>
+<arg>${suite_g7c1_classid}</arg>
+</arguments>
+<msg timestamp="20200919 18:41:12.369" level="INFO">http://ci.ytesting.com/api/3school/school_classes/480431
+"删除班级返回结果：{'retcode': 0}"</msg>
+<status status="PASS" starttime="20200919 18:41:12.266" endtime="20200919 18:41:12.369"></status>
+</kw>
+<status status="FAIL" starttime="20200919 18:41:09.607" endtime="20200919 18:41:12.369"></status>
+</suite>
+<status status="FAIL" starttime="20200919 18:41:07.591" endtime="20200919 18:41:12.373"></status>
+</suite>
+<status status="FAIL" starttime="20200919 18:41:07.558" endtime="20200919 18:41:12.376"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="5" fail="2">Critical Tests</stat>
+<stat pass="5" fail="2">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="5" fail="2" id="s1" name="Tc">Tc</stat>
+<stat pass="5" fail="2" id="s1-s1" name="Api空白数据">Tc.Api空白数据</stat>
+<stat pass="5" fail="2" id="s1-s1-s1" name="D-七年级1班">Tc.Api空白数据.D-七年级1班</stat>
+<stat pass="5" fail="2" id="s1-s1-s1-s1" name="班级管理">Tc.Api空白数据.D-七年级1班.班级管理</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
