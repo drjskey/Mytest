@@ -4,6 +4,7 @@
 # time : 2020/8/10 15:13
 HOST = "ci.ytesting.com"
 my_vcode = "00000010893537273822"
+aaa = "测试git"
 """不方便以及的编号适合配置参数"""
 # 年级号
 g_grade_7_id = 1    # 初一
