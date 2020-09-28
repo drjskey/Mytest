@@ -4,7 +4,7 @@
 # time : 2020/8/10 15:13
 HOST = "ci.ytesting.com"
 my_vcode = "00000010893537273822"
-aaa = "测试git"
+
 """不方便以及的编号适合配置参数"""
 # 年级号
 g_grade_7_id = 1    # 初一
@@ -20,5 +20,6 @@ middle_English_id = 11  # 初中英语
 middle_Sports_id = 12   # 初中体育
 high_chinese_id = 13    # 高中语文
 high_math_id = 14       # 高中数学
+
 
 g_login_url="http://ci.ytesting.com/portal/home.html"
